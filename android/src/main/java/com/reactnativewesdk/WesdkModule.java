@@ -30,16 +30,17 @@ public class WesdkModule extends ReactContextBaseJavaModule {
     // Example method
     // See https://reactnative.dev/docs/native-modules-android
     @ReactMethod
-    public void multiply(String appId, String userName, Promise promise) {
+    public void multiply(String appId, String userName, String path,Promise promise) {
       IWXAPI api = WXAPIFactory.createWXAPI(this._reactContext, appId);
 
       WXLaunchMiniProgram.Req req = new WXLaunchMiniProgram.Req();
       req.userName = userName; // 填小程序原始id
-//      req.path = path;                  ////拉起小程序页面的可带参路径，不填默认拉起小程序首页，对于小游戏，可以只传入 query 部分，来实现传参效果，如：传入 "?foo=bar"。
+      req.path = path;                  ////拉起小程序页面的可带参路径，不填默认拉起小程序首页，对于小游戏，可以只传入 query 部分，来实现传参效果，如：传入 "?foo=bar"。
       req.miniprogramType = WXLaunchMiniProgram.Req.MINIPROGRAM_TYPE_TEST;// 可选打开 开发版，体验版和正式版
       api.sendReq(req);
-      promise.resolve(a * b);
+      promise.resolve(null);
     }
 
-    public static native int nativeMultiply(int a, int b);
+
+    public static native int nativeMultiply(String appId, String userName, String path);
 }

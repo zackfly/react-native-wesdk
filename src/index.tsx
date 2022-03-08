@@ -17,6 +17,10 @@ const Wesdk = NativeModules.Wesdk
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return Wesdk.multiply(a, b);
+export function multiply(
+  appId: string,
+  userName: string,
+  path: string
+): Promise<number> {
+  return Wesdk.multiply(appId, userName, path);
 }
